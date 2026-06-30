@@ -117,9 +117,16 @@
     <section class="lab-section">
       <h2>v-if & v-else</h2>
       <p>Toggle visibility based on a condition.</p>
-      <button @click="showMessage = !showMessage">Toggle Message</button>
-      <p class="message success">✨ You're a Vue superstar! ✨</p>
-      <p>Click the button to see a message.</p>
+       <button @click="showMessage = !showMessage">
+            Toggle Message
+       </button>
+        <p v-if="showMessage" class="message success">
+    ✨ You're a Vue superstar! ✨
+        </p>
+
+        <p v-else class="message">
+            Click the button to see a message.
+        </p>
     </section>
 
     <section class="lab-section">
