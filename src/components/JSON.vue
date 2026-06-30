@@ -3,34 +3,51 @@
   <div class="json-lab">
     <h1>🗄️ JSON Data & Vue Directives Lab</h1>
 
-    <section class="lab-section">
-      <h2>📚 Working with JSON Arrays</h2>
-      <p>Our <code>authors.json</code> contains an array of author objects.</p>
+<section class="lab-section">
+  <h2>📚 Working with JSON Arrays</h2>
+  <p>Our <code>authors.json</code> contains an array of author objects.</p>
 
-      <h3>Iterating through Arrays</h3>
-      <!-- Activity 6: Render a list containing author names and their birth years. Hint: Make use of the v-for directive to iterate through the array of authors. -->
-      <!-- TODO: CODE TO RENDER LIST OF AUTHORS HERE -->
-      
-      <h3>Filtering Arrays</h3>
-      <!-- Activity 7: Render a list containing authors born after 1850. Hint: Make use of the v-for directive to iterate through the array of authors that you have filtered out. -->
-      <p>Authors born after 1850:</p>
-      <!-- TODO: CODE TO RENDER LIST OF AUTHORS HERE -->
+  <h3>Activity 6: Iterating through Arrays</h3>
+  <p>All authors:</p>
+  <ul>
+    <li v-for="author in authors" :key="author.id">
+      {{ author.name }} ({{ author.birthYear }})
+    </li>
+  </ul>
 
-      <h3>Mapping Arrays</h3>
-      <p>Famous works:</p>
-      <ul>
-        <!-- Activity 8: Render a list of all famous works. Hint: Use the v-for directive to iterate through the array of authors that you have filtered out. -->
-        <!-- TODO: CODE TO RENDER LIST OF FAMOUS WORKS HERE -->
-      </ul>
+  <h3>Activity 7: Filtering Arrays</h3>
+  <p>Authors born after 1850:</p>
+  <ul>
+    <li v-for="author in modernAuthors" :key="author.id">
+      {{ author.name }} ({{ author.birthYear }})
+    </li>
+  </ul>
 
-      <h3>Finding in Arrays</h3>
-      <p>Finding by property: {{ orwell?.name }}</p>
+  <h3>Activity 8: Mapping Arrays</h3>
+  <p>Famous works:</p>
+  <ul>
+    <li v-for="work in allFamousWorks" :key="work">
+      {{ work }}
+    </li>
+  </ul>
 
-      <h3>Nested Arrays/Objects</h3>
-      <p>{{ austen?.name }}'s works:</p>
-      <!-- Activity 9: Render a list of Austen's works. Hint: Use the v-for directive to iterate through the array of authors that you have filtered out. -->
-      <!-- TODO: CODE TO RENDER LIST OF AUSTEN'S WORKS HERE -->
-    </section>
+  <h3>Activity 4: Finding in Arrays</h3>
+  <p v-if="orwell">Finding by property: {{ orwell.name }}</p>
+  <p v-else>George Orwell was not found.</p>
+
+  <h3>Activity 5 and Activity 9: Nested Arrays/Objects</h3>
+  <p v-if="austen">{{ austen.name }}'s works:</p>
+  <p v-else>Author with ID 1 was not found.</p>
+
+  <ul v-if="austen && austen.famousWorks">
+    <li
+      v-for="(work, index) in austen.famousWorks"
+      :key="`austen-work-${index}`"
+    >
+      {{ getWorkTitle(work) }}
+    </li>
+  </ul>
+</section>
 
     <section class="lab-section">
       <h2>🏢 Working with JSON Objects</h2>
