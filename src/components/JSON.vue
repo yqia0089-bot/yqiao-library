@@ -129,10 +129,24 @@
         </p>
     </section>
 
-    <section class="lab-section">
-      <h2>Attribute, Class and Style Binding with <code>v-bind</code></h2>
-      <p>Highlighting Specific Authors:</p>
-    </section>
+<section class="lab-section">
+  <h2>Attribute, Class and Style Binding with <code>v-bind</code></h2>
+  <p>Highlighting Specific Authors:</p>
+
+  <ul>
+    <li
+      v-for="author in authors"
+      :key="`highlight-${author.id}`"
+      :class="{ highlight: author.name === 'George Orwell' }"
+      :style="author.name === 'George Orwell'
+        ? { fontWeight: 'bold', border: '2px solid #42b883' }
+        : {}"
+      :title="author.name === 'George Orwell' ? 'Highlighted author: George Orwell' : 'Author'"
+    >
+      {{ author.name }} ({{ author.birthYear }})
+    </li>
+  </ul>
+</section>
   </div>
 </template>
 
