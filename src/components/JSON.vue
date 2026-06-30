@@ -85,31 +85,41 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue"
-
-// Activity 1: Import JSON files (authors.json and bookstores.json)
-// TODO: CODE TO IMPORT JSON FILES HERE
+import { ref, computed } from 'vue'
+import authors from '../assets/json/authors.json'
+import bookstores from '../assets/json/bookstores.json'
 
 const showMessage = ref(false)
 
 // Activity 2: Get authors born after 1850
 const modernAuthors = computed(() => {
-  // TODO: CODE TO FILTER ARRAY OF AUTHORS HERE
+  return authors.filter((author) => author.birthYear > 1850)
 })
+
+// Helper function for famous works
+const getWorkTitle = (work) => {
+  if (typeof work === 'string') {
+    return work
+  }
+
+  return work.title || work.name || 'Untitled Work'
+}
 
 // Activity 3: Get all famous works
 const allFamousWorks = computed(() => {
-  // TODO: CODE TO GET ALL FAMOUS WORKS HERE
+  return authors.flatMap((author) =>
+    (author.famousWorks || []).map((work) => getWorkTitle(work))
+  )
 })
 
 // Activity 4: Find author by name
 const orwell = computed(() => {
-  // TODO: CODE TO FIND AUTHOR BY NAME HERE
+  return authors.find((author) => author.name === 'George Orwell')
 })
 
 // Activity 5: Find author by ID
 const austen = computed(() => {
-  // TODO: CODE TO FIND AUTHOR BY ID HERE
+  return authors.find((author) => Number(author.id) === 1)
 })
 </script>
 
